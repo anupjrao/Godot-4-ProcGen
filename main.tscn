@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://b55d4gyh8l6q7"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_7m7v2"]
+[ext_resource type="Texture2D" uid="uid://cfae6w3fwcenx" path="res://assets/Grass.png" id="1_s7usu"]
+[ext_resource type="Texture2D" uid="uid://ealx82cnk6es" path="res://assets/Shore.png" id="2_8bbnm"]
+[ext_resource type="Texture2D" uid="uid://cm6w28y2s6wc7" path="res://icon.svg" id="4_in1rf"]
+[ext_resource type="Script" path="res://player.gd" id="4_xq8hy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nd3hr"]
+texture = ExtResource("1_s7usu")
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lexgw"]
+texture = ExtResource("2_8bbnm")
+1:0/0 = 0
+0:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sasc4"]
+sources/0 = SubResource("TileSetAtlasSource_nd3hr")
+sources/2 = SubResource("TileSetAtlasSource_lexgw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dch42"]
+size = Vector2(32, 32)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_7m7v2")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sasc4")
+format = 2
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("4_xq8hy")
+SPEED = 10000
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_in1rf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_dch42")
